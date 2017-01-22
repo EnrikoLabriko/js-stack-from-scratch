@@ -8,6 +8,7 @@ import del from 'del';
 import eslint from 'gulp-eslint';
 import webpack from 'webpack-stream';
 import mocha from 'gulp-mocha';
+import flow from 'gulp-flowtype';
 import webpackConfig from './webpack.config.babel';
 
 const paths = {
@@ -52,7 +53,8 @@ gulp.task('lint', () =>
   ])
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError()),
+    .pipe(eslint.failAfterError())
+    .pipe(flow({ abort: true })),
 );
 
 gulp.task('test', ['build'], () =>
